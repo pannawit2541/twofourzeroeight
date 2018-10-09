@@ -9,7 +9,14 @@ namespace twozerofoureight
 {
     public class Model
     {
+        protected double Score;
         protected ArrayList oList;
+
+        public string Show_Score_onBoard(string Sum)
+        {
+            Sum = Score.ToString();
+            return Sum;
+        }
 
         public Model()
         {

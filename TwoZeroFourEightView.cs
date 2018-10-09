@@ -14,7 +14,7 @@ namespace twozerofoureight
     {
         Model model;
         Controller controller;
-       
+
         public TwoZeroFourEightView()
         {
             InitializeComponent();
@@ -30,16 +30,25 @@ namespace twozerofoureight
             UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
         }
 
+        private void Show_Score()
+        {
+            LabelScore.Text = model.Show_Score_onBoard("Score");
+        }
+
         private void UpdateTile(Label l, int i)
         {
+            Show_Score();
             if (i != 0)
             {
                 l.Text = Convert.ToString(i);
             } else {
                 l.Text = "";
             }
+
+            
             switch (i)
             {
+                
                 case 0:
                     l.BackColor = Color.Gray;
                     break;
@@ -76,7 +85,7 @@ namespace twozerofoureight
             UpdateTile(lbl32,board[3, 2]);
             UpdateTile(lbl33,board[3, 3]);
         }
-
+        
         private void btnLeft_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
@@ -95,6 +104,25 @@ namespace twozerofoureight
         private void btnDown_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+        }
+
+        private void TwoZeroFourEightView_Key(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    btnUp_Click(sender, e);
+                    break;
+                case Keys.A:
+                    btnLeft_Click(sender, e);
+                    break;
+                case Keys.S:
+                    btnDown_Click(sender, e);
+                    break;
+                case Keys.D:
+                    btnRight_Click(sender, e);
+                    break;
+            }
         }
 
     }
