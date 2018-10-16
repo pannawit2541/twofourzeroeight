@@ -32,20 +32,19 @@ namespace twozerofoureight
 
         private void Show_Score()
         {
-            LabelScore.Text = model.Show_Score_onBoard("Score");
-        }
+            LabelScore.Text = model.Show_Score_onBoard();
+        } //Show Score!
 
         private void UpdateTile(Label l, int i)
         {
-            Show_Score();
+            
+            Show_Score(); //plus score on board
             if (i != 0)
             {
                 l.Text = Convert.ToString(i);
             } else {
                 l.Text = "";
             }
-
-            
             switch (i)
             {
                 
@@ -104,6 +103,7 @@ namespace twozerofoureight
         private void btnDown_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
+
         }
 
         private void TwoZeroFourEightView_Key(object sender, KeyEventArgs e)
@@ -123,7 +123,18 @@ namespace twozerofoureight
                     btnRight_Click(sender, e);
                     break;
             }
+            Game_over(); //check can't paly game;
         }
+
+        private void Game_over()
+        {
+            if (model.Check_Gamover())
+            {
+                MessageBox.Show("Game Over", "", MessageBoxButtons.OK);
+            }
+
+        } //check board full and can't play game.
+
 
     }
 }

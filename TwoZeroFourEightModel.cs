@@ -11,6 +11,7 @@ namespace twozerofoureight
         protected int boardSize; // default is 4
         protected int[,] board;
         protected Random rand;
+
         
 
         public TwoZeroFourEightModel() : this(4)
@@ -38,9 +39,45 @@ namespace twozerofoureight
             NotifyAll();
         }
 
+        private bool Check_boardNotFull()
+        {
+            for(int i = 0; i < boardSize; i++)
+            {
+                for(int j = 0; j < boardSize; j++)
+                {
+                    if (board[i, j] == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } //Check board full?
+
+        protected bool Check_board_near()
+        {
+            for(int i = 0; i < boardSize; i++)
+            {
+                try
+                {
+                    for(int j = 0; j<boardSize; j++)
+                    {
+                        //check near number is equal
+                        if (board[i, j] == board[i, j + 1] || board[i, j] == board[i + 1, j])
+                        { 
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception) { }
+            }
+            return true;
+
+        }
+
         private int[,] Random(int[,] input)
         {
-            while (true)
+            while (Check_boardNotFull())
             {
                 int x = rand.Next(boardSize);
                 int y = rand.Next(boardSize);
@@ -49,6 +86,10 @@ namespace twozerofoureight
                     board[x, y] = 2;
                     break;
                 }
+            }
+            if (!Check_boardNotFull())
+            {
+                flag_Gamover = Check_board_near();
             }
             return input;
         }

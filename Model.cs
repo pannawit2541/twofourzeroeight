@@ -11,11 +11,16 @@ namespace twozerofoureight
     {
         protected double Score;
         protected ArrayList oList;
+        protected bool flag_Gamover;
 
-        public string Show_Score_onBoard(string Sum)
+        public bool Check_Gamover()
         {
-            Sum = Score.ToString();
-            return Sum;
+            return flag_Gamover;
+        }
+
+        public string Show_Score_onBoard()
+        {
+            return Score.ToString();
         }
 
         public Model()
